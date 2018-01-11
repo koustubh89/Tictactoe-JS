@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Tic Tac Toe</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            body { width: 650px; margin: 0 auto; border: 1px solid #ddd; padding: 20px 5px; height: 100vh;}
+            a { color: #0095DD; text-decoration: none; }
+            a:hover { text-decoration: underline; }
+            .box {
+                border: 1px solid #eee;
+                width: 100px; 
+                height: 100px;
+                float: left;
+                position: relative;
+                font-size: 20px;
+                line-height: 100px;
+                text-align: center;
+            }
+            .box:hover {
+                cursor: pointer;
+            }
+            .container-box {
+                width: 330px;
+                margin: 0 auto;
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .play {
+                padding: 5px 10px;
+                margin: 5px auto;
+                width: 100px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Tic Tac Toe</h1>
+        <p>Choose which sign starts first. Then click the mouse the square on which the player wants to place the sign.</p>
+        <p>Hint, who to start</p>
+        <div class="control-panel">
+            <input type="radio" name="turnType" onclick="turnTypeChanged();" id="cross"/> <label for="cross"> cross </label>
+            <input type="radio" name="turnType" onclick="turnTypeChanged();" id="round" checked/> <label for="round"> round </label>
+        </div>
+        <div class="game-div">
+            <div class="container-box">
+                <div class="first-row">
+                    <div class="box" id="a1" onclick="boxClick('a', 1)"></div>
+                    <div class="box" id="a2" onclick="boxClick('a', 2)"></div>
+                    <div class="box" id="a3" onclick="boxClick('a', 3)"></div>
+                </div>
+                <div class="second-row">
+                    <div class="box" id="b1" onclick="boxClick('b', 1)"></div>
+                    <div class="box" id="b2" onclick="boxClick('b', 2)"></div>
+                    <div class="box" id="b3" onclick="boxClick('b', 3)"></div>
+                </div>
+                <div class="third-row">
+                    <div class="box" id="c1" onclick="boxClick('c', 1)"></div>
+                    <div class="box" id="c2" onclick="boxClick('c', 2)"></div>
+                    <div class="box" id="c3" onclick="boxClick('c', 3)"></div>
+                </div>  
+                <!-- <button class="play" onclick="play();">
+                    <span>Play</span>
+                    <span id="player-turn"></span>
+                </button> -->
+            </div>
+        </div>
+        <script src="model.js"></script>
+    </body>
+</html>
