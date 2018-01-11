@@ -6,22 +6,16 @@ var roundPositions = [];
 function Game () {
     var placedSign = [];
 
-    var clearGame = function() {
-
-    }
-
     var paintBox = function (element, char) {
         document.getElementById(element).innerHTML = char;
     }
 
     var resetGame = function() {
-        console.log('reset game');
         allPositions = [];
         crossPositions = [];
         roundPositions = [];
         let innerBoxes = document.getElementsByClassName('box');
         for(var i = 0; i< innerBoxes.length; i++) {
-            console.log('box', innerBoxes[i]);
             let id = innerBoxes[i].id;
             paintBox(id, null); 
         };
@@ -30,13 +24,8 @@ function Game () {
     var changeTurn = function() {
         turn = !turn;
     }
-    
-    var placeSign = function() {
-        changeTurn();
-    }
 
     var evaluate = function() {
-        console.log('evaluate');
         let crossLength = crossPositions.length;
         let roundLength = roundPositions.length;
         if (crossLength > 2) {
@@ -59,7 +48,6 @@ function Game () {
                 columnNames.push(col);
                 rowNames.push(row);
             });
-            console.log(columnNames, rowNames);
 
             function count(array_elements) {
                 array_elements.sort();
@@ -96,7 +84,6 @@ function Game () {
             var rowSame = count(rowNames);
             var columnSame = count(columnNames);
 
-            console.log('row = ', rowSame, 'col = ', columnSame );
             if (rowSame || columnSame || diagonalWin()) {
                 let winningSign = undefined;
                 if (turn) {
@@ -108,18 +95,17 @@ function Game () {
                 if (restart ) {
                     resetGame();
                 }
-            } else if(rowNames.length + columnNames.length === 9) {
+            } else if(rowNames.length + columnNames.length >= 9) {
                 var restart = confirm('Game draw');
                 if (restart ) {
                     resetGame();
                 }
             }
         }
-        placeSign();
+        changeTurn();
     }
 
     var markPositionAsUsed = function(position) {
-        console.log('marking sign', position);
         let target = position.row + position.column;
         if (turn) {
             document.getElementById(target).innerHTML = 'X';
@@ -132,19 +118,16 @@ function Game () {
     return {
         pushCross: function(positionObj) {
             crossPositions.push(positionObj);
-            console.log('crossPositions -> ', crossPositions);
             markPositionAsUsed(positionObj);
         },
         pushRound: function(positionObj) {
             roundPositions.push(positionObj);
-            console.log('roundPositions -> ', roundPositions);            
             markPositionAsUsed(positionObj);
         }
     }
 }
 
 function turnTypeChanged() {
-    console.log("we rock");
     let cross = document.getElementById('cross').checked;
     let round = document.getElementById('round').checked;
     if (cross) {
@@ -156,8 +139,7 @@ function turnTypeChanged() {
 
 function boxClick(rowIdentifier, columnIdentifier) {
     var boxIdentifier = {row: rowIdentifier, column: columnIdentifier};
-    var newGame = new Game();
-    console.log(boxIdentifier);
+    var newGame = new Game()
 
     var alreadyPresent = allPositions.find(x => x.row == boxIdentifier.row && x.column == boxIdentifier.column)
 
