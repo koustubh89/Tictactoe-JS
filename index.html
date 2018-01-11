@@ -18,6 +18,11 @@
             }
             a { color: #0095DD; text-decoration: none; }
             a:hover { text-decoration: underline; }
+            h1.heading, .control-panel {text-align: center;}
+            p.instructions, .control-panel {
+                width: 90%;
+                margin: 0 auto;
+            }
             .content {
                 padding: 20px 5px;
                 position: relative;
@@ -65,8 +70,8 @@
     <body>
         <div class="content">
 
-            <h1>Tic Tac Toe</h1>
-            <p>Choose which sign starts first. Then click the mouse the square on which the player wants to place the sign.</p>
+            <h1 class="heading">Tic Tac Toe</h1>
+            <p class="instructions">Choose which sign starts first. Then click the mouse the square on which the player wants to place the sign.</p>
             <div class="control-panel">
                 <span>Hint, Select which sign moves first: </span>
                 <input type="radio" name="turnType" onclick="turnTypeChanged();" id="cross"/> <label for="cross"> X </label>
