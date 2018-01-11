@@ -6,9 +6,24 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
-            body { width: 650px; margin: 0 auto; border: 1px solid #ddd; padding: 20px 5px; height: 100vh;}
+            body { 
+                width: 650px;
+                margin: 0 auto;
+                border: 1px solid #ddd;
+                height: 99vh;
+                
+                background: #73C8A9;  /* fallback for old browsers */
+                background: -webkit-linear-gradient(to right, #373B44, #73C8A9);  /* Chrome 10-25, Safari 5.1-6 */
+                background: linear-gradient(to right, #373B44, #73C8A9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            }
             a { color: #0095DD; text-decoration: none; }
             a:hover { text-decoration: underline; }
+            .content {
+                padding: 20px 5px;
+                position: relative;
+                background: white;
+                height: 94%;
+            }
             .box {
                 border: 1px solid #eee;
                 width: 100px; 
@@ -19,6 +34,14 @@
                 line-height: 100px;
                 text-align: center;
             }
+            .box:hover {
+                -webkit-box-shadow: 1px -2px 28px 2px rgba(197,212,217,1);
+                -moz-box-shadow: 1px -2px 28px 2px rgba(197,212,217,1);
+                box-shadow: 1px -2px 28px 2px rgba(197,212,217,1);
+             }
+            .box:nth-child(2) {border-left: 0; border-right: 0;}
+            .first-row .box{ border-bottom: 0;}
+            .third-row .box{ border-top: 0;}
             .box:hover {
                 cursor: pointer;
             }
@@ -40,36 +63,36 @@
         </style>
     </head>
     <body>
-        <h1>Tic Tac Toe</h1>
-        <p>Choose which sign starts first. Then click the mouse the square on which the player wants to place the sign.</p>
-        <div class="control-panel">
-            <span>Hint, Select which sign moves first: </span>
-            <input type="radio" name="turnType" onclick="turnTypeChanged();" id="cross"/> <label for="cross"> X </label>
-            <input type="radio" name="turnType" onclick="turnTypeChanged();" id="round" checked/> <label for="round"> O </label>
-        </div>
-        <div class="game-div">
-            <div class="container-box">
-                <div class="first-row">
-                    <div class="box" id="a1" onclick="boxClick('a', 1)"></div>
-                    <div class="box" id="a2" onclick="boxClick('a', 2)"></div>
-                    <div class="box" id="a3" onclick="boxClick('a', 3)"></div>
+        <div class="content">
+
+            <h1>Tic Tac Toe</h1>
+            <p>Choose which sign starts first. Then click the mouse the square on which the player wants to place the sign.</p>
+            <div class="control-panel">
+                <span>Hint, Select which sign moves first: </span>
+                <input type="radio" name="turnType" onclick="turnTypeChanged();" id="cross"/> <label for="cross"> X </label>
+                <input type="radio" name="turnType" onclick="turnTypeChanged();" id="round" checked/> <label for="round"> O </label>
+            </div>
+            <div class="game-div">
+                <div class="container-box">
+                    <div class="first-row">
+                        <div class="box" id="a1" onclick="boxClick('a', 1)"></div>
+                        <div class="box" id="a2" onclick="boxClick('a', 2)"></div>
+                        <div class="box" id="a3" onclick="boxClick('a', 3)"></div>
+                    </div>
+                    <div class="second-row">
+                        <div class="box" id="b1" onclick="boxClick('b', 1)"></div>
+                        <div class="box" id="b2" onclick="boxClick('b', 2)"></div>
+                        <div class="box" id="b3" onclick="boxClick('b', 3)"></div>
+                    </div>
+                    <div class="third-row">
+                        <div class="box" id="c1" onclick="boxClick('c', 1)"></div>
+                        <div class="box" id="c2" onclick="boxClick('c', 2)"></div>
+                        <div class="box" id="c3" onclick="boxClick('c', 3)"></div>
+                    </div>
                 </div>
-                <div class="second-row">
-                    <div class="box" id="b1" onclick="boxClick('b', 1)"></div>
-                    <div class="box" id="b2" onclick="boxClick('b', 2)"></div>
-                    <div class="box" id="b3" onclick="boxClick('b', 3)"></div>
-                </div>
-                <div class="third-row">
-                    <div class="box" id="c1" onclick="boxClick('c', 1)"></div>
-                    <div class="box" id="c2" onclick="boxClick('c', 2)"></div>
-                    <div class="box" id="c3" onclick="boxClick('c', 3)"></div>
-                </div>  
-                <!-- <button class="play" onclick="play();">
-                    <span>Play</span>
-                    <span id="player-turn"></span>
-                </button> -->
             </div>
         </div>
         <script src="model.js"></script>
     </body>
 </html>
+        

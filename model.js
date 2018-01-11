@@ -3,8 +3,11 @@ var allPositions = [];
 var crossPositions = [];
 var roundPositions = [];
 
+document.onload(turnTypeChanged());
+
 function Game () {
     var placedSign = [];
+    let newGame = undefined;
 
     var paintBox = function (element, char) {
         document.getElementById(element).innerHTML = char;
@@ -19,6 +22,8 @@ function Game () {
             let id = innerBoxes[i].id;
             paintBox(id, null); 
         };
+        turnTypeChanged();
+        return false;
     }
 
     var changeTurn = function() {
@@ -28,7 +33,7 @@ function Game () {
     var evaluate = function() {
         let crossLength = crossPositions.length;
         let roundLength = roundPositions.length;
-        if (crossLength > 2) {
+        if ((turn && crossLength > 2) || (!turn && roundLength > 2)) {
             var columnNames = [];
             var rowNames = [];
             var signEvaluated = undefined;
@@ -91,38 +96,46 @@ function Game () {
                 } else {
                     winningSign = 'O';                 
                 }
-                var restart = confirm(winningSign + ' Wins');
-                if (restart ) {
-                    resetGame();
-                }
+                newGame = true; 
+                restartGame(' wins', winningSign);
             } else if(rowNames.length + columnNames.length >= 9) {
-                var restart = confirm('Game draw');
-                if (restart ) {
-                    resetGame();
-                }
+                newGame = true; 
+                restartGame('Game draw', undefined);                
             }
         }
-        changeTurn();
+        if (!newGame) {
+            changeTurn();
+        }
+    }
+
+    var restartGame = function(message, winningSign) {
+        let combinedMessage = undefined;
+        winningSign ? combinedMessage = winningSign + message : combinedMessage = message;  
+        let restart = confirm(combinedMessage);
+        if (restart ) {
+            resetGame();
+        }
     }
 
     var markPositionAsUsed = function(position) {
         let target = position.row + position.column;
         if (turn) {
-            document.getElementById(target).innerHTML = 'X';
+            paintBox(target, 'X');
         } else {
             paintBox(target, 'O');      
         }
-        evaluate();
     }
 
     return {
         pushCross: function(positionObj) {
-            crossPositions.push(positionObj);
             markPositionAsUsed(positionObj);
+            crossPositions.push(positionObj);
+            evaluate();
         },
         pushRound: function(positionObj) {
-            roundPositions.push(positionObj);
             markPositionAsUsed(positionObj);
+            roundPositions.push(positionObj);
+            evaluate();
         }
     }
 }
